@@ -1,3 +1,4 @@
+// destructuring assignment 分割代入
 {
   // const obj = {
   //   foo: 123,
