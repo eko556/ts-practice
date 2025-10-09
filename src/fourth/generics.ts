@@ -1,5 +1,4 @@
-import { resolveObjectURL } from "buffer";
-
+type Func = <T>(arg: T, num: number) => T[];
 {
   function repeat<T>(element: T, length: number): T[] {
     const result: T[] = [];
@@ -11,6 +10,7 @@ import { resolveObjectURL } from "buffer";
 
   console.log(repeat("TEST", 13));
   console.log(repeat<number>(13, 13));
+  console.log(repeat<string>("TEST", 13));
 }
 
 {
@@ -26,8 +26,8 @@ import { resolveObjectURL } from "buffer";
 
 {
   //アロー関数のとき
-  const repeat = <T>(element: T, length: number): T[] => {
-    const result: T[] = [];
+  const repeat: Func = (element, length) => {
+    const result = [];
     for (let i = 0; i < length; i++) {
       result.push(element);
     }
