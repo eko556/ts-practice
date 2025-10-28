@@ -12,6 +12,10 @@
     }
     public filterOlder(users: readonly User[]): User[] {
       return users.filter((u) => u.#age > this.#age);
+      //thisの型を記述する特殊な書き方(非推奨)
+      // return users.filter(function (this: User, u) {
+      //   return u.#age > this.#age;
+      // });
     }
   }
   const uhyo = new User("uhyo", 26);
@@ -42,10 +46,20 @@
   const john = new User("John Smith", 15);
 
   console.log(uhyo.isAdult());
-
+// apply(obj, args)は、関数の中のthisをobjにして呼び出す。argsは引数を配列に入れたもの
+// call(obj, args...)はapplyの引数を配列にまとめずに渡すのみの違い
   console.log(uhyo.isAdult.apply(john, []));
   console.log(uhyo.isAdult.call(john));
 
   const boundIsAdult = uhyo.isAdult.bind(uhyo);
   console.log(Reflect.apply(boundIsAdult, uhyo, []));
+}
+
+{
+  class A {
+    foo = 123;
+    bar = this.foo + 100;
+  }
+  const obj = new A();
+  console.log(obj.bar);ß
 }
