@@ -46,8 +46,8 @@
   const john = new User("John Smith", 15);
 
   console.log(uhyo.isAdult());
-// apply(obj, args)は、関数の中のthisをobjにして呼び出す。argsは引数を配列に入れたもの
-// call(obj, args...)はapplyの引数を配列にまとめずに渡すのみの違い
+  // apply(obj, args)は、関数の中のthisをobjにして呼び出す。argsは引数を配列に入れたもの
+  // call(obj, args...)はapplyの引数を配列にまとめずに渡すのみの違い
   console.log(uhyo.isAdult.apply(john, []));
   console.log(uhyo.isAdult.call(john));
 
@@ -61,5 +61,22 @@
     bar = this.foo + 100;
   }
   const obj = new A();
-  console.log(obj.bar);ß
+  console.log(obj.bar);
+}
+
+{
+  //組み込みオブジェクトは実質クラスみたいなもの。継承にも使用できる
+  class RepeatArray<T> extends Array<T> {
+    repeat(times: number): RepeatArray<T> {
+      const result = new RepeatArray<T>();
+      for (let i = 0; i < times; i++) {
+        result.push(...this);
+      }
+      return result;
+    }
+  }
+  const arr = new RepeatArray(1, 2);
+  arr.push(3);
+  const repeated = arr.repeat(3);
+  console.log(repeated);
 }
